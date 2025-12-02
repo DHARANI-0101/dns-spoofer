@@ -3,8 +3,8 @@
 from pydivert import WinDivert
 from dnslib import DNSRecord, RR, QTYPE, A
 
-TARGET_DOMAIN = "www.google.com"
-FAKE_IP = "10.0.2.16"
+TARGET_DOMAIN = " " # Enter the website you want to spoof (e.g., www.google.com)
+FAKE_IP = " " # Enter the IP address you want the spoofed domain to redirect to (malicious/evil IP)  
 FILTER = "udp.DstPort == 53 or udp.SrcPort == 53"
 
 print("[+] DNS Spoofer Running on Windows...")
@@ -38,3 +38,4 @@ with WinDivert(FILTER) as w:
             pass
 
         w.send(packet)
+
